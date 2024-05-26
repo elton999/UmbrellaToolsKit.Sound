@@ -8,11 +8,11 @@ namespace UmbrellaToolsKit.Sound
         public FMOD.Studio.System SoundSystem;
         public FMOD.Studio.Bank LocalizedBank;
 
-        public SoundManager Instance { get; }
+        public static SoundManager Instance => _instance;
 
-        private SoundManager _instance;
+        private static SoundManager _instance;
 
-        public SoundManager(string bankPath) 
+        public SoundManager(string bankPath)
         {
             if (_instance != null) return;
 
@@ -44,9 +44,9 @@ namespace UmbrellaToolsKit.Sound
             EventDescription eventDescription;
             EventInstance eventInstance;
 
-            if(!LogResult(SoundSystem.getEventByID(id, out eventDescription))) return default;
+            if (!LogResult(SoundSystem.getEventByID(id, out eventDescription))) return default;
 
-            if(!LogResult(eventDescription.createInstance(out eventInstance))) return default;
+            if (!LogResult(eventDescription.createInstance(out eventInstance))) return default;
 
             return eventInstance;
         }
